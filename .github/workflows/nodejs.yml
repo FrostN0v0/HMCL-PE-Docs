@@ -1,21 +1,18 @@
 name: Node.js CI
-
-on: [push]
-
+on:
+  push:
+    branches:
+      - master
+ 
 jobs:
-  build:
+  publish-npm:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16]
-
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: "12.x"
+          registry-url: https://registry.npmjs.org/
       - run: npm install
       - run: npm run build
         env:
