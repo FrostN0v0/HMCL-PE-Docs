@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'HMCL-PE',
+  title: 'HMCL-PE-Docs',
   tagline: 'Hello Minecraft! Launcher For Android',
   url: 'https://hmclpe.adorable0v0.top',
   baseUrl: '/',
