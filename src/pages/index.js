@@ -6,9 +6,6 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import dynamic from 'next/dynamic'; 
-const Music = dynamic(import("../components/Music"), {
-ssr: false,
-});
 
 
 function HomepageHeader() {
@@ -42,5 +39,4 @@ export default function Home() {
       </main>
     </Layout>
   );
-  <Music/>
 }
