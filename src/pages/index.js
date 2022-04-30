@@ -8,7 +8,7 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import dynamic from 'next/dynamic'; 
 const Music = dynamic(import("../components/Music"), {
 ssr: false,
-
+});
 
 
 function HomepageHeader() {
