@@ -5,6 +5,11 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import dynamic from 'next/dynamic'; 
+const Music = dynamic(import("../components/Music"), {
+ssr: false,
+
+
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -37,4 +42,5 @@ export default function Home() {
       </main>
     </Layout>
   );
+  <Music/>
 }
