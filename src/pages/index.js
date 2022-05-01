@@ -1,12 +1,15 @@
-import React from 'react';
-import clsx from 'clsx';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import styles from './index.module.css';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import 'APlayer/dist/APlayer.min.css';
-import APlayer from 'APlayer';
+import React, { Component } from "react";
+import clsx from "clsx";
+import Layout from "@theme/Layout";
+import Link from "@docusaurus/Link";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import styles from "./index.module.css";
+import HomepageFeatures from "@site/src/components/HomepageFeatures";
+import ReactAplayer from "react-aplayer";
+import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
+import APlayer from "aplayer";
+import "aplayer/dist/APlayer.min.css";
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
@@ -25,32 +28,7 @@ function HomepageHeader() {
     </header>
   );
 }
-function footer(){
-const ap = new APlayer({
-  container: document.getElementById('player'),
-  mini: false,
-  autoplay: false,
-  theme: '#FADFA3',
-  loop: 'all',
-  order: 'random',
-  preload: 'auto',
-  volume: 0.7,
-  mutex: true,
-  listFolded: false,
-  listMaxHeight: 90,
-  lrcType: 3,
-  audio: [
-    {
-      name: 'Unlasting',
-      artist: 'LiSA',
-      url: 'https://adorable0v0.top/music/unlasting.mp3',
-      cover: 'https://adorable0v0.top/api/image/37.jpg',
-      lrc: 'https://adorable0v0.top/music/unlasting.lrc',
-      theme: '#ebd0c2'
-    }
-  ]
-});
-}
+
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
@@ -64,3 +42,102 @@ export default function Home() {
     </Layout>
   );
 }
+function getElementViewLeft(element) {
+  let actualLeft = element.offsetLeft;
+  let current = element.offsetParent;
+  const elementScrollLeft =
+    document.body.scrollLeft + document.documentElement.scrollLeft;
+  if (
+    !document.fullscreenElement &&
+    !document.mozFullScreenElement &&
+    !document.webkitFullscreenElement
+  ) {
+    while (current !== null) {
+      actualLeft += current.offsetLeft;
+      current = current.offsetParent;
+    }
+  } else {
+    while (current !== null && current !== element) {
+      actualLeft += current.offsetLeft;
+      current = current.offsetParent;
+    }
+  }
+  return actualLeft - elementScrollLeft;
+}
+
+class APlyer extends Component {
+  state = {
+    left1: 0,
+    left2: 0
+  };
+  initPlayer1 = ($video) => {
+    if ($video) {
+      this.setState({
+        left1: getElementViewLeft($video)
+      });
+      this.APlayer = new APlayer({
+        container: $video,
+        audio: [
+          {
+            name: "Unlasting1",
+            artist: "LiSA",
+            url: "https://adorable0v0.top/music/unlasting.mp3",
+            cover: "https://adorable0v0.top/api/image/37.jpg",
+            lrc: "https://adorable0v0.top/music/unlasting.lrc",
+            theme: "#ebd0c2"
+          }
+        ]
+      });
+    }
+  };
+  initPlayer2 = ($video) => {
+    if ($video) {
+      this.setState({
+        left2: getElementViewLeft($video)
+      });
+      this.APlayer = new APlayer({
+        container: $video,
+        audio: [
+          {
+            name: "Unlasting",
+            artist: "LiSA",
+            url: "https://adorable0v0.top/music/unlasting.mp3",
+            cover: "https://adorable0v0.top/api/image/37.jpg",
+            lrc: "https://adorable0v0.top/music/unlasting.lrc",
+            theme: "#ebd0c2"
+          }
+        ]
+      });
+    }
+  };
+
+  componentWillUnmount() {
+    if (this.APlayer) {
+      this.APlayer.destroy();
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <p>left: {this.state.left1}</p>
+        <div
+          style={{
+            width: "400px"
+          }}
+          ref={this.initPlayer1}
+        />
+        <p>left: {this.state.left2}</p>
+        <div
+          style={{
+            width: "400px",
+            left: 100,
+            transform: "translate(50%, 50%)"
+          }}
+          ref={this.initPlayer2}
+        />
+      </div>
+    );
+  }
+}
+ReactDOM.render(<APlyer />, document.querySelector("#root"));
