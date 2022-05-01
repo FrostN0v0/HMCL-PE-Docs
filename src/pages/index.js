@@ -5,7 +5,8 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-
+import ReactDOM from 'react-dom';
+import App from '@site/src/components/app';
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
@@ -24,7 +25,7 @@ function HomepageHeader() {
     </header>
   );
 }
-
+ReactDOM.render(<App />, document.getElementById('app'));
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
