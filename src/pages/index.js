@@ -25,6 +25,7 @@ function HomepageHeader() {
     </header>
   );
 }
+function footer(){
 const ap = new APlayer({
   container: document.getElementById('player'),
   mini: false,
@@ -49,6 +50,7 @@ const ap = new APlayer({
     }
   ]
 });
+}
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
