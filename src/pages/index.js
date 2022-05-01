@@ -5,8 +5,8 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import ReactDOM from 'react-dom';
-import App from '@site/src/components/app';
+import 'APlayer/dist/APlayer.min.css';
+import APlayer from 'APlayer';
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
@@ -25,7 +25,30 @@ function HomepageHeader() {
     </header>
   );
 }
-ReactDOM.render(<App />, document.getElementById('app'));
+const ap = new APlayer({
+  container: document.getElementById('player'),
+  mini: false,
+  autoplay: false,
+  theme: '#FADFA3',
+  loop: 'all',
+  order: 'random',
+  preload: 'auto',
+  volume: 0.7,
+  mutex: true,
+  listFolded: false,
+  listMaxHeight: 90,
+  lrcType: 3,
+  audio: [
+    {
+      name: 'Unlasting',
+      artist: 'LiSA',
+      url: 'https://adorable0v0.top/music/unlasting.mp3',
+      cover: 'https://adorable0v0.top/api/image/37.jpg',
+      lrc: 'https://adorable0v0.top/music/unlasting.lrc',
+      theme: '#ebd0c2'
+    }
+  ]
+});
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
